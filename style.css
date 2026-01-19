@@ -76,10 +76,9 @@ body {
   z-index: 3;
 }
 
-/* Scale container */
+/* Scale containers */
 .scale-container {
   position: absolute;
-  left: 8px;
   bottom: 20px;
   height: calc(100% - 80px);
   display: flex;
@@ -88,19 +87,36 @@ body {
   z-index: 2;
 }
 
+.scale-container.left {
+  left: 6px;
+}
+
+.scale-container.right {
+  right: 6px;
+}
+
 .scale-mark {
   display: flex;
   align-items: center;
-  gap: 4px;
-  font-size: 9px;
+  gap: 3px;
+  font-size: 8px;
   color: rgba(255, 255, 255, 0.5);
   font-weight: 500;
 }
 
+.scale-mark.right {
+  flex-direction: row-reverse;
+}
+
 .scale-tick {
-  width: 6px;
+  width: 5px;
   height: 1px;
   background: rgba(255, 255, 255, 0.3);
+}
+
+.scale-label {
+  min-width: 16px;
+  text-align: center;
 }
 
 /* Track */
@@ -175,7 +191,7 @@ body {
 }
 
 .temp-value {
-  font-size: 36px;
+  font-size: 28px;
   font-weight: 600;
   color: #9aff9a;
   text-shadow: 0 0 10px rgba(120, 255, 160, 0.8);
