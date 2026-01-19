@@ -4,21 +4,37 @@
   const knob = document.getElementById("knob");
   const tempValue = document.getElementById("tempValue");
   const statusText = document.getElementById("statusText");
-  const scaleContainer = document.getElementById("scaleContainer");
+  const scaleContainerLeft = document.getElementById("scaleContainerLeft");
+  const scaleContainerRight = document.getElementById("scaleContainerRight");
 
   const MIN_TEMP = 0;
   const MAX_TEMP = 100;
 
   let isDragging = false;
 
+  // Convert Celsius to Fahrenheit
+  function celsiusToFahrenheit(c) {
+    return Math.round((c * 9/5) + 32);
+  }
+
   // Create scale marks
   function createScale() {
-    const marks = [100, 80, 60, 40, 20, 0];
-    marks.forEach(temp => {
+    // Celsius scale (left side) - 0 to 100°C
+    const celsiusMarks = [100, 80, 60, 40, 20, 0];
+    celsiusMarks.forEach(temp => {
       const mark = document.createElement("div");
       mark.className = "scale-mark";
-      mark.innerHTML = `<div class="scale-tick"></div><span>${temp}</span>`;
-      scaleContainer.appendChild(mark);
+      mark.innerHTML = `<div class="scale-tick"></div><span class="scale-label">${temp}</span>`;
+      scaleContainerLeft.appendChild(mark);
+    });
+
+    // Fahrenheit scale (right side) - corresponding F values
+    const fahrenheitMarks = celsiusMarks.map(c => celsiusToFahrenheit(c));
+    fahrenheitMarks.forEach(temp => {
+      const mark = document.createElement("div");
+      mark.className = "scale-mark right";
+      mark.innerHTML = `<div class="scale-tick"></div><span class="scale-label">${temp}</span>`;
+      scaleContainerRight.appendChild(mark);
     });
   }
 
@@ -38,13 +54,16 @@
     mercury.style.height = percent + "%";
     knob.style.bottom = percent + "%";
 
-    tempValue.textContent = temp + "°";
+    const fahrenheit = celsiusToFahrenheit(temp);
+    tempValue.textContent = `${temp}°C / ${fahrenheit}°F`;
 
-    if (temp < 30) {
+    if (temp < 15) {
       statusText.textContent = "Cold";
-    } else if (temp < 60) {
+    } else if (temp < 25) {
+      statusText.textContent = "Cool";
+    } else if (temp < 30) {
       statusText.textContent = "Comfortable";
-    } else if (temp < 80) {
+    } else if (temp < 35) {
       statusText.textContent = "Warm";
     } else {
       statusText.textContent = "Hot";
@@ -81,5 +100,5 @@
 
   // Initialize
   createScale();
-  updateUI(70);
+  updateUI(25);
 })();
