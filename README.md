@@ -2,7 +2,7 @@
 
 A sleek, interactive thermostat interface featuring modern glassmorphism design with a glowing mercury column and dual temperature scales.
 
-![Glass Thermostat UI](screenshot.png)
+![Glass Thermostat UI](https://github.com/Sumon-Kayal/glass-thermostat-ui/blob/e0844d0195b98173a1dfd0b57999b29276d94bdb/Screenshot_2026-01-19-23-02-05-917_org.cromite.cromite.jpg)
 
 ## Features
 
